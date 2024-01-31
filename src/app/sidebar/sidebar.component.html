@@ -1,0 +1,9 @@
+<div>
+    {{counter | number }}
+
+    <p>{{ 'hi brother' | appCapitalize: shouldAddPoint }}</p>
+
+    <app-counter (newItemEvent)="changeValueNUmber()" ></app-counter>
+
+    <button (click)="addPoint()" >add point</button>
+</div>
