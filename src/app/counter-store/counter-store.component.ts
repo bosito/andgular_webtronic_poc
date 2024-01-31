@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { decrement, increment, reset } from '../counter-store-actions/counter.actions';
+import { decrement, increment, reset } from '../stores/counter/counter.actions';
 
 @Component({
   selector: 'app-counter-store',
   templateUrl: './counter-store.component.html',
   styleUrls: ['./counter-store.component.css'],
-  // standalone: true
+  // standalone: true, really I don't know what is the difference is I use it or not
 })
 export class CounterStoreComponent {
   observableCount$: Observable<number>;

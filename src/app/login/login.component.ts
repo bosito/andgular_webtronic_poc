@@ -1,5 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,9 +10,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class LoginComponent {
 
+  public auth$: Observable<unknown>;
 
-  @Input() title?: string
-
+  constructor(private store: Store<any>){
+    this.auth$ = this.store.select('')
+  }
 
   formState = new FormGroup({
     name: new FormControl(''),

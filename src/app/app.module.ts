@@ -9,7 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { CounterStoreComponent } from './counter-store/counter-store.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './counter-store-actions/counter.reducer';
+import { counterReducer } from './stores/counter/counter.reducer';
+import { RouterModule } from '@angular/router';
+import { routes } from './app.routes';
+import { authReducer } from './stores/auth/app-auth.reducer';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { counterReducer } from './counter-store-actions/counter.reducer';
     FormsModule,
     ReactiveFormsModule,
     SidebarModule,
-    StoreModule.forRoot({ counterReducer }, {}),
+    StoreModule.forRoot({ counterReducer, authentication: authReducer }, {}),
+    RouterModule.forRoot(routes),
   ],
   providers: [],
   bootstrap: [AppComponent],
