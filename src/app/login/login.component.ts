@@ -1,7 +1,8 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   public auth$: Observable<unknown>;
 
-  constructor(private store: Store<any>){
-    this.auth$ = this.store.select('')
+  constructor(private store: Store<any>, private auth: AuthService) {
+    this.auth$ = this.store.select('');
   }
 
   formState = new FormGroup({
@@ -34,7 +34,13 @@ export class LoginComponent {
     return this.formState.get('password') as FormControl;
   }
 
-  submitLogin = () => {
+  public submitLogin = () => {
+    console.log('login submit -->', {
+      name: this.name.value,
+      password: this.password.value,
+      email: this.email.value,
+    });
 
-  }
+    // this.auth$.pipe().subscribe({ next: (state) => {} });
+  };
 }

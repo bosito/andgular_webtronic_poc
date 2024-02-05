@@ -13,6 +13,7 @@ import { counterReducer } from './stores/counter/counter.reducer';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { authReducer } from './stores/auth/app-auth.reducer';
+import { reducers } from './app.reducers';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { authReducer } from './stores/auth/app-auth.reducer';
     FormsModule,
     ReactiveFormsModule,
     SidebarModule,
-    StoreModule.forRoot({ counterReducer, authentication: authReducer }, {}),
+    StoreModule.forRoot(reducers),
     RouterModule.forRoot(routes),
   ],
   providers: [],
