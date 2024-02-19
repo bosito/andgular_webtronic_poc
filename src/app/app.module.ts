@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
 import { authReducer } from './stores/auth/app-auth.reducer';
 import { reducers } from './app.reducers';
+import { ObservableComponent } from './observable/observable.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { reducers } from './app.reducers';
     LoginComponent,
     HomeComponent,
     CounterStoreComponent,
+    ObservableComponent
   ],
   imports: [
     BrowserModule,
