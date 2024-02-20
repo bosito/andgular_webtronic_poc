@@ -8,7 +8,7 @@ export const initialState = {
 
 export const authReducer = createReducer(
   initialState,
-  on(login, (state) => {
+  on(login, (state, { password, username, type }) => {
     return {
       ...state,
       isLoggedIn: true,
