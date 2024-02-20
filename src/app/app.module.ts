@@ -9,12 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SidebarModule } from './sidebar/sidebar.module';
 import { CounterStoreComponent } from './counter-store/counter-store.component';
 import { StoreModule } from '@ngrx/store';
-import { counterReducer } from './stores/counter/counter.reducer';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { authReducer } from './stores/auth/app-auth.reducer';
 import { reducers } from './app.reducers';
 import { ObservableComponent } from './observable/observable.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -30,6 +29,7 @@ import { ObservableComponent } from './observable/observable.component';
     FormsModule,
     ReactiveFormsModule,
     SidebarModule,
+    HttpClientModule,
     StoreModule.forRoot(reducers),
     RouterModule.forRoot(routes),
   ],

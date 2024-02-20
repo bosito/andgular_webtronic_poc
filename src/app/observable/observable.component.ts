@@ -3,14 +3,18 @@ import {
   Observable,
   Subject,
   concatMap,
+  finalize,
   from,
   fromEvent,
+  interval,
   map,
   of,
   range,
   switchMap,
+  timer,
 } from 'rxjs';
 import { IRealPriceProduct, listProducts } from './mock/observable.mock';
+import { GifsService } from '../gifs.service';
 
 @Component({
   selector: 'app-observable',
@@ -18,6 +22,8 @@ import { IRealPriceProduct, listProducts } from './mock/observable.mock';
   styleUrls: ['./observable.component.css'],
 })
 export class ObservableComponent implements OnInit {
+
+  constructor(private gifService: GifsService){}
   ngOnInit(): void {
     // this.myFirstObservable();
     // this.counterInterval();
@@ -29,6 +35,9 @@ export class ObservableComponent implements OnInit {
     // this.operatorFromEvent();
     // this.operatorConcatMap();
     // this.operatorSwitchMap();
+    // this.operatorSwitchMapFinally();
+    // this.operatorIntervalAndTimer();
+    this.handleObservableHttp();
   }
 
   private myFirstObservable() {
@@ -273,5 +282,59 @@ export class ObservableComponent implements OnInit {
     );
 
     observableSwitch$.subscribe((value) => console.log('switchMap -->', value));
+  }
+
+  private operatorSwitchMapFinally() {
+    // that is the last example
+    // the switchMap create a observer peer each value and finished each one when is emitted
+    // but how you can know is a subscription is finished ?
+
+    // that operator is useful is you can know if the observable is finished
+    const observableSwitch$ = of(1, 2, 3).pipe(
+      switchMap((value) =>
+        of(value)
+          .pipe(map((value) => value * 2))
+          .pipe(
+            finalize(() => {
+              console.log('the observer not emit values');
+            })
+          )
+      )
+    );
+
+    observableSwitch$.subscribe((value) => console.log('switchMap -->', value));
+  }
+
+  private operatorIntervalAndTimer() {
+    // the operator interval send the values in an interval of time
+    // const interval$ = interval(1000)
+
+    // the value is the number in intervals sending
+    // interval$.subscribe((value)=>console.log('interval -->',value))
+
+    // the operator interval ins async
+    // console.log('stared');
+    // interval$.subscribe((value)=>console.log('interval -->',value))
+    // console.log('finished');
+
+    // the result
+    // 1.- stared
+    // 2.- finished
+    // 3.- interval --> 1
+    // 4.- interval --> 2
+    // 5.- ...
+
+    // TIMER
+
+    // const timer$ = timer(3000);
+
+    // the operator interval ins async
+    // console.log('stared');
+    // timer$.subscribe((value)=>console.log('tiler value ->', value))
+    // console.log('finished');
+  }
+
+  private handleObservableHttp(){
+    this.gifService.searchTag('pokemon');
   }
 }
